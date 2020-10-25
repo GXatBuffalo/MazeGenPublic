@@ -20,12 +20,12 @@ function newMaze(){
     for(let i = 0;i<pathtiles;i++){  //populating roughly half the maze with "walls"
         var randx = Math.floor(Math.random() * MAZEX);
         var randy = Math.floor(Math.random() * MAZEY);
-        maze[randy][randx] = "x";
+        maze[randy][randx] = "■";
     }
     for(let y = 0;y<MAZEY;y++){ // any place that is not a "wall" will be marked as a "path"
         for(let x=0;x<MAZEX;x++){
-            if((!maze[y][x]) || maze[y][x] !== "x"){
-                maze[y][x] = '+';
+            if((!maze[y][x]) || maze[y][x] !== "■"){
+                maze[y][x] = "□";
             }
         }
     }
@@ -35,16 +35,16 @@ function newMaze(){
     	for(let y = 1;y<MAZEY-1;y++){ 
         	for(let x=1;x<MAZEX-1;x++){ //for each block in the 2d array (not counting the sides)
             	blockCount = 0; //this basically tells us there is a 2x2 block of wall or path when it is 0 or 4
-                if(maze[y][x] == "+"){ // this and the next three statements count path blocks
+                if(maze[y][x] == "□"){ // this and the next three statements count path blocks
                 	blockCount+=1;
                 }
-                if(maze[y-1][x] == "+"){
+                if(maze[y-1][x] == "□"){
                 	blockCount+=1;
                 }
-                if(maze[y][x-1] == "+"){
+                if(maze[y][x-1] == "□"){
                 	blockCount+=1;
                 }
-                if(maze[y-1][x-1] == "+"){
+                if(maze[y-1][x-1] == "□"){
                 	blockCount+=1;
                 }
             	if(blockCount == 0){ //2x2 block of wall detected
@@ -52,16 +52,16 @@ function newMaze(){
             		var del = Math.floor((Math.random() * 4)); //randomly choose one of the 2x2 to change to path
             		switch(del){
                     	case 0:
-                   		maze[y][x] = "+";
+                   		maze[y][x] = "□";
                     	break;
                     case 1:
-                    	maze[y-1][x] = "+";
+                    	maze[y-1][x] = "□";
                     	break;
                     case 2:
-                    	maze[y][x-1] = "+";
+                    	maze[y][x-1] = "□";
                     	break;
                     case 3:
-                    	maze[y-1][x-1] = "+";
+                    	maze[y-1][x-1] = "□";
                     	break;
               		}
                     blockCount++;
@@ -71,32 +71,32 @@ function newMaze(){
                   	var del = Math.floor((Math.random() * 4)); //randomly choose one of the 2x2 to change to wall
                 	switch(del){
                       case 0:
-                          maze[y][x] = "x";
+                          maze[y][x] = "■";
                           break;
                       case 1:
-                          maze[y-1][x] = "x";
+                          maze[y-1][x] = "■";
                           break;
                       case 2:
-                          maze[y][x-1] = "x";
+                          maze[y][x-1] = "■";
                           break;
                       case 3:
-                          maze[y-1][x-1] = "x";
+                          maze[y-1][x-1] = "■";
                           break;
 					}
 					blockCount -=1;
 				}
-                if(maze[y][x] == "+"){//if the current block is a path
+                if(maze[y][x] == "□"){//if the current block is a path
                 	var pathCount = 0; // count how many adjacent paths with the next four if statements
-                	if(maze[y+1][x] == "+"){
+                	if(maze[y+1][x] == "□"){
                 		pathCount+=1;
                 	}
-                	if(maze[y-1][x] == "+"){
+                	if(maze[y-1][x] == "□"){
                 		pathCount+=1;
                 	}
-                	if(maze[y][x-1] == "+"){
+                	if(maze[y][x-1] == "□"){
                 		pathCount+=1;
                 	}
-                	if(maze[y][x+1] == "+"){
+                	if(maze[y][x+1] == "□"){
                 		pathCount+=1;
                 	}
                 	if(pathCount == 1 || pathCount == 0 ){ //if only one path detected
@@ -104,31 +104,31 @@ function newMaze(){
             			var del = Math.floor((Math.random() * 4));//choose one random wall to make path
             			switch(del){
                     		case 0:
-                            	if(maze[y+1][x] == "x"){
-                   					maze[y+1][x] = "+";
+                            	if(maze[y+1][x] == "■"){
+                   					maze[y+1][x] = "□";
                                 }else{
-                                	maze[y-1][x] = "+";
+                                	maze[y-1][x] = "□";
                                 }
                     			break;
                     		case 1:
-                            	if(maze[y-1][x] == "x"){
-                   					maze[y-1][x] = "+";
+                            	if(maze[y-1][x] == "■"){
+                   					maze[y-1][x] = "□";
                                 }else{
-                                	maze[y+1][x] = "+";
+                                	maze[y+1][x] = "□";
                                 }
                     			break;
                     		case 2:
-                            	if(maze[y][x+1] == "x"){
-                   					maze[y][x+1] = "+";
+                            	if(maze[y][x+1] == "■"){
+                   					maze[y][x+1] = "□";
                                 }else{
-                                	maze[y][x-1] = "+";
+                                	maze[y][x-1] = "□";
                                 }
                     			break;
                     		case 3:
-                            	if(maze[y][x-1] == "x"){
-                   					maze[y][x-1] = "+";
+                            	if(maze[y][x-1] == "■"){
+                   					maze[y][x-1] = "□";
                                 }else{
-                                	maze[y][x+1] = "+";
+                                	maze[y][x+1] = "□";
                                 }
                     			break;
               			}
@@ -139,12 +139,12 @@ function newMaze(){
     }
     /*
     for(let i=0;i<MAZEX;i++){ //loop to make the edges all walls
-    	maze[0][i]="x";
-        maze[MAZEY-1][i]= "x";
+    	maze[0][i]="■";
+        maze[MAZEY-1][i]= "■";
     }
     for(let i = 0;i<MAZEY;i++){
-    	maze[i][0]="x";
-        maze[i][MAZEX-1]= "x";
+    	maze[i][0]="■";
+        maze[i][MAZEX-1]= "■";
     }
     */
     return maze;
@@ -169,7 +169,7 @@ var Pacman = { //Pacman's numbers and number altering methods
     randLoc: function(){ // randomly puts pacman on a path, only call at start of round please.
     	this.oldX = this.coordX;
         this.oldY = this.coordY;
-    	while(maze[this.coordY][this.coordX] == "x"){
+    	while(maze[this.coordY][this.coordX] == "■"){
         	this.oldX = this.coordX;
         	this.oldY = this.coordY;
 			this.coordX = Math.floor(Math.random() * MAZEX);
@@ -194,7 +194,7 @@ var Blinky = { // red ghost numbers and stuff
 	targetX: 0, // x coord that Blinky wants to go (its gonna be where Pacman is right now)
     targetY: 0, // y coord Blinky wants to go.
     randLoc: function(){ // sets Blinky on a random path tile. only call at beginning of round.
-    	while(maze[this.coordY][this.coordX] == "x"){
+    	while(maze[this.coordY][this.coordX] == "■"){
 			this.coordX = Math.floor(Math.random() * MAZEX);
 			this.coordY = Math.floor(Math.random() * MAZEY);
         }
@@ -212,7 +212,7 @@ var Inky = { // Blue Ghost.
 	targetX: 0, //x coord where Inky wants to go
     targetY: 0,
     randLoc: function(){ // sets Inky's starting location
-    	while(maze[this.coordY][this.coordX] == "x"){
+    	while(maze[this.coordY][this.coordX] == "■"){
 			this.coordX = Math.floor(Math.random() * MAZEX);
 			this.coordY = Math.floor(Math.random() * MAZEY);
         }
@@ -239,7 +239,7 @@ var Inky = { // Blue Ghost.
             	yFactor = -1
                 dirY = MAZEY-1
             }
-            while(maze[dirY][dirX] == "x"){
+            while(maze[dirY][dirX] == "■"){
             	dirX += Math.floor(Math.random()) * xFactor;
                 dirY += Math.floor(Math.random()) * yFactor;
             }
@@ -261,7 +261,7 @@ var Pinky = { //pink ghost, tries to go where pacman is currently heading.
 	targetX: 0,
     targetY: 0,
     randLoc: function(){
-    	while(maze[this.coordY][this.coordX] == "x"){
+    	while(maze[this.coordY][this.coordX] == "■"){
 			this.coordX = Math.floor(Math.random() * MAZEX);
 			this.coordY = Math.floor(Math.random() * MAZEY);
         }
@@ -288,7 +288,7 @@ var Pinky = { //pink ghost, tries to go where pacman is currently heading.
             	yFactor = -1
                 dirY = MAZEY-1
             }
-            while(maze[dirY][dirX] == "x"){
+            while(maze[dirY][dirX] == "■"){
             	dirX += Math.floor(Math.random()) * xFactor;
                 dirY += Math.floor(Math.random()) * yFactor;
             }
